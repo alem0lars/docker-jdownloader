@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 
 MAINTAINER Alessandro Molari <molari.alessandro@gmail.com>
- 
+
 # == BASIC SOFTWARE ============================================================
 
 RUN apk update \
@@ -18,16 +18,13 @@ RUN adduser -D $JDOWNLOADER_USER -h $JDOWNLOADER_HOME -s /bin/bash
 
 # == APP =======================================================================
 
-ENV JDOWNLOADER_COMMAND java -Djava.awt.headless=true -jar -norestart $JDOWNLOADER_HOME/jdownloader.jar
-
 # Install jdownloader.
-RUN wget \
-    --progress=bar:force \
-    -O $JDOWNLOADER_HOME/jdownloader.jar \
-    http://installer.jdownloader.org/JDownloader.jar
+RUN wget --quiet \
+         -O $JDOWNLOADER_HOME/JDownloader.jar \
+         http://installer.jdownloader.org/JDownloader.jar
 
 # Start jdownloader for the initial update and creation of config files.
-RUN $JDOWNLOADER_COMMAND
+RUN java -Djava.awt.headless=true -jar $JDOWNLOADER_HOME/JDownloader.jar > /dev/null 2>&1
 
 # == LOGROTATE =================================================================
 
@@ -47,7 +44,7 @@ ADD dist/rsyslog.conf /etc/rsyslog.d/90-jdownloader.conf
 
 RUN apk add --update --no-cache supervisor
 
-ADD dist/supervisord.ini /etc/supervisor.d/supervisord.ini
+ADD dist/supervisord.conf /etc/supervisord.conf
 
 # == ENTRYPOINT ================================================================
 
