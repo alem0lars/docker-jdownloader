@@ -1,6 +1,0 @@
-jdownloader:
-  image: alem0lars/jdownloader
-  volumes:
-    - /data/jdownloader/cfg:/home/jdownloader/cfg
-    - /data/jdownloader/downloads:/home/jdownloader/Downloads
-  restart: always
