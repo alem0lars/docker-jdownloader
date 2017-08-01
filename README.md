@@ -23,3 +23,7 @@ https://my.jdownloader.org
 
 After starting the container, you can see and manage your dockerized jdownloader
 through the web interface available at https://my.jdownloader.org
+
+## Version
+
+1.0.0
