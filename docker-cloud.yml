@@ -1,9 +1,6 @@
 jdownloader:
-    build: .
-    ports:
-      - 8080:8080
-      - 3389:3389
-    volumes:
-      - ./data/cfg:/home/jdownloader/cfg
-      - ./data/media:/media
-    restart: always
+  image: alem0lars/jdownloader
+  volumes:
+    - /data/tmp/jdownloader-cfg:/home/jdownloader/cfg
+    - /data/tmp/jdownloader-downloads:/home/jdownloader/Downloads
+  restart: always
