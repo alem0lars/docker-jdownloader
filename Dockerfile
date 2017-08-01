@@ -60,9 +60,4 @@ ADD dist/supervisord.conf /etc/supervisord.conf
 
 # == ENTRYPOINT ================================================================
 
-# Web
-EXPOSE 5800
-# VPN
-EXPOSE 5900
-
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
